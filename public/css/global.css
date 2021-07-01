@@ -1,0 +1,26 @@
+.bg {
+    background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Qc9g5mHo5repaqIyEN3eFQHaFj%26pid%3DApi&f=1') no-repeat;
+    background-size: 200%;
+    width: 100%;
+    height: 100vh;
+}
+
+.w-img {
+    width: 500px;
+}
+
+@media only screen and (max-width: 678px)
+{
+    .bg {
+        background-size: 300%;
+    }
+
+}
+
+@media only screen and (max-width: 1018px)
+{
+    .mt-2sm {
+        margin-top: 10px;
+    }
+}
+
