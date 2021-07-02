@@ -64,7 +64,8 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
-        return view("blabla", compact("movie"));
+        $title = "Detail Film";
+        return view("Movies.show", compact("movie", "title"));
     }
 
     /**
@@ -103,7 +104,7 @@ class MovieController extends Controller
             $image->storeAs("public/images", $image_name);
 
             $data["image"] = $image_name;
-        }   
+        }
 
         $movie->update($data);
 

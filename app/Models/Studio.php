@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Studio extends Model
 {
-    protected $fillable = ["name","slug", "basic_price", "additional_friday_price", "additional_saturday_price", "additional_sunday_price"];
+    protected $fillable = ["name","slug", "basic_price", "additional_friday_price", "additional_saturday_price", "additional_sunday_price", "branch_id"];
 
     public function branch()
     {

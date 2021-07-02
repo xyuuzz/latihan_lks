@@ -24,7 +24,15 @@ class ScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "start_date" => "date|required",
+            "start_time" => "required|size:5"
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            "start_time.size" => "contoh format field diatas : 20:00"
         ];
     }
 }

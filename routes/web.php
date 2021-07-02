@@ -27,10 +27,15 @@ Route::post("login", [AuthController::class, "login"])->name("login_u");
 
 Route::middleware("auth")->group(function() {
 
+    Route::delete("schedule/{schedule:slug}/{page}", [ScheduleController::class, "destroy"])->name("schedule.destroy");
+    Route::patch("schedule/{schedule:slug}/{page}", [ScheduleController::class, "update"])->name("schedule.update");
+    Route::patch("schedule/{schedule:slug}/{page}", [ScheduleController::class, "update"])->name("schedule.update");
+
     Route::resource('movie', MovieController::class)
             ->scoped(["movie" => "slug"]);
     Route::resource('schedule', ScheduleController::class)
-            ->scoped(["schedule" => "slug"]);
+            ->scoped(["schedule" => "slug"])
+            ->except(["destroy", "update"]);
     Route::resource('branch', BranchController::class)
             ->scoped(["branch" => "slug"]);
     Route::resource('studio', StudioController::class)

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light container">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">XXI Coorporation</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -9,7 +9,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ route("index") }}">Home<span class="sr-only">(current)</span></a>
       </li>
-      @if(Auth::user()->role === "admin")
+      @if( Auth::user()?->role === "admin" )
         <li class="nav-item">
             <a class="nav-link" href="{{ route("movie.index") }}">Daftar Film</a>
         </li>
@@ -18,19 +18,23 @@
                 Kelola Cabang & Studio
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Cabang</a>
+                <a class="dropdown-item" href="{{ route("branch.index") }}">Cabang</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Jadwal Studio</a>
-                <a class="dropdown-item" href="#">Studio</a>
+                <a class="dropdown-item" href="{{ route("schedule.index") }}">Jadwal Studio</a>
+                <a class="dropdown-item" href="{{ route("studio.index") }}">Studio</a>
             </div>
         </li>
       @endif
     </ul>
 
     @if(Auth::check())
-    <div class="nav-item">
-        <a class="text-dark" href="{{ route("logout") }}">Logout</a>
-    </div>
+        <div class="nav-item">
+            <a class="text-dark" href="{{ route("logout") }}">Logout</a>
+        </div>
+    @else
+        <div class="nav-item">
+            <a class="text-dark" href="{{ route("login") }}">Login</a>
+        </div>
     @endif
   </div>
 </nav>

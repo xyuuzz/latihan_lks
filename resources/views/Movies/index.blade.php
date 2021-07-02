@@ -37,12 +37,7 @@
                     </td>
                     <td>{{ $film->duration }} Menit</td>
                     <td>
-                        <a href="{{ route("movie.edit", ["movie" => $film->slug]) }}" class="btn btn-primary btn-sm">Edit</a>
-                        <form action="{{ route("movie.destroy", ["movie" => $film->slug]) }}" method="POST" class="d-inline">
-                            @method("DELETE")
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm mt-2sm ">Hapus</button>
-                        </form>
+                        <a href="{{ route("movie.show", ["movie" => $film->slug]) }}" class="btn btn-primary btn-sm">Lihat Detail</a>
                     </td>
                     </tr>
                     @empty

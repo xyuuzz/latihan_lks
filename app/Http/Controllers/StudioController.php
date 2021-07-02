@@ -15,7 +15,10 @@ class StudioController extends Controller
      */
     public function index()
     {
-        return view("blabla");
+        $title = "List Studio";
+        $list_studio = Studio::latest()->paginate(10);
+        $index = request("page") ? request("page") * 10 - (10-1) : 1;
+        return view("Studios.index", compact("title", "list_studio", "index"));
     }
 
     /**
@@ -25,7 +28,11 @@ class StudioController extends Controller
      */
     public function create()
     {
-        return view("blabla");
+        $title = "Tambah Studio";
+        $desc = "Isi form dibawah untuk menambahkan studio";
+        $list_cabang = Branch::all();
+        $url = route("studio.store");
+        return view("Studios.create", compact("title", "desc", "list_cabang", "url"));
     }
 
     /**
@@ -36,17 +43,18 @@ class StudioController extends Controller
      */
     public function store(StudioRequest $request)
     {
-        $branch = Branch::find($request->branch);
+        $branch = Branch::find($request->cabang);
 
         $branch->studio()->create([
             "name" => $request->name,
             "slug" => \Str::slug($request->name),
-            "basic_price" => 50.000,
-            "additional_friday_price" => 55.000,
-            "additional_saturday_price" => 75.000,
-            "additional_sunday_price" => 85.000,
+            "basic_price" => $request->basic_price,
+            "additional_friday_price" => $request->additional_friday_price,
+            "additional_saturday_price" => $request->additional_saturday_price,
+            "additional_sunday_price" => $request->additional_sunday_price,
         ]);
 
+        session()->flash("success", "Berhasil menambahkan 1 data studio");
         return redirect()->to(route("studio.index"));
     }
 
@@ -58,7 +66,8 @@ class StudioController extends Controller
      */
     public function show(Studio $studio)
     {
-        return view("blabla", compact($studio));
+        $title = "Detail Studio";
+        return view("Studios.show", compact("studio", "title"));
     }
 
     /**
@@ -69,7 +78,11 @@ class StudioController extends Controller
      */
     public function edit(Studio $studio)
     {
-        return view("blabla", compact("studio"));
+        $title = "Sunting Studio";
+        $desc = "Ubah form dibawah jika ingin mensunting data studio";
+        $list_cabang = Branch::all();
+        $url = route("studio.update", ["studio" => $studio->slug]);
+        return view("Studios.create", compact("title", "desc", "list_cabang", "url", "studio"));
     }
 
     /**
@@ -82,15 +95,17 @@ class StudioController extends Controller
     public function update(StudioRequest $request, Studio $studio)
     {
         $field = [
+            "branch_id" => $request->cabang,
             "name" => $request->name,
-            "additional_friday_price" => 55.000,
-            "additional_saturday_price" => 75.000,
-            "additional_sunday_price" => 85.000,
+            "additional_friday_price" => $request->additional_friday_price,
+            "additional_saturday_price" => $request->additional_saturday_price,
+            "additional_sunday_price" => $request->additional_sunday_price,
         ];
 
         $studio->update($field);
 
-        return redirect()->to(route("studio.show"));
+        session()->flash("success", "Berhasil mensunting data studio");
+        return redirect()->to(route("studio.show", ["studio" => $studio->slug]));
     }
 
     /**
@@ -104,6 +119,7 @@ class StudioController extends Controller
         $studio->schedule()->delete();
         $studio->delete();
 
+        session()->flash("success", "Berhasil Menghapus 1 studio dari daftar");
         return redirect()->to(route("studio.index"));
     }
 }

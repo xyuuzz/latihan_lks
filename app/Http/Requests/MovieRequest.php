@@ -26,7 +26,7 @@ class MovieRequest extends FormRequest
         $validate = [
             "name" => "required|string|min:2|max:50",
             "image" => "required|file|mimes:png,jpg,jpeg",
-            "duration" => "required|numeric"
+            "duration" => "required|numeric|max:999"
         ];
 
         if($this->getMethod() === "PATCH")

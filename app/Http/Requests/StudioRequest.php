@@ -24,7 +24,12 @@ class StudioRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name" => "required|string|min:4|max:50",
+            "cabang" => "required",
+            "basic_price" => "required",
+            "additional_friday_price" => "required",
+            "additional_saturday_price" => "required",
+            "additional_sunday_price" => "required"
         ];
     }
 }

@@ -14,15 +14,12 @@
   </head>
   <body>
 
-    @if(Auth::check())
-
-        @include("templates.navbar")
+        @if(!request()->routeIs("login"))
+            @include("templates.navbar")
+        @endif
         @yield("content")
         @include("templates.footer")
 
-    @else
-        @yield("content")
-    @endif
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->

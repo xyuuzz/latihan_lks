@@ -5,10 +5,8 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-header">
-                <div class="d-flex justify-content-between">
-                    <h5>{{ $desc }}</h5>
-                    <a href="{{ route("movie.index") }}" class="btn btn-warning">Kembali</a>
-                </div>
+                <h5 class="d-inline">{{ $desc }}</h5>
+                <a href="{{ route("movie.index") }}" class="btn btn-warning float-right">Kembali</a>
             </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data" action="{{ $url }}">
@@ -41,7 +39,7 @@
                     <div class="form-group">
                         <label for="image">Banner Film</label>
                         <input name="image" type="file" id="image" onchange="previewImage()"
-                        {{ $movie->image ? "" : "required" }}
+                        {{ $movie->image ?? "required" }}
                         class="form-control @error("image") {{ "is-invalid" }} @enderror " >
                         @error('image')
                             <div class="alert alert-danger mt-2" role="alert">

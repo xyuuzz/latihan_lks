@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model
 {
-    protected $fillable = ["slug", "start", "end", "movie_id", "studio_id"];
+    protected $fillable = ["slug", "start", "end", "studio_id", "movie_id"];
 
     public function movie()
     {
