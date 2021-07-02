@@ -8,46 +8,62 @@
             <h4 class="text-center text-bold">Halaman Home</h4>
         </div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <h4>Avangers</h4>
-                            <p>Durasi : 143 Menit </p>
-                            <p>Tersedia di Kota : ...</p>
-                            <button type="button" class="btn btn-outline-primary d-block mb-3" data-toggle="modal" data-target="#exampleModal">
-                                Pesan Sekarang
-                            </button>
-                            <img class="rounded shadow w-img img-fluid" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.eMZEc1Hd9mWFPvWEeV-9dwHaEI%26pid%3DApi&f=1" alt="">
-                        </div>
-                    </div>
-
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <h4>Avangers</h4>
-                            <p>Durasi : 143 Menit </p>
-                            <p>Tersedia di Kota : ...</p>
-                            <button type="button" class="btn btn-outline-primary d-block mb-3" data-toggle="modal" data-target="#exampleModal">
-                                Pesan Sekarang
-                            </button>
-                            <img class="rounded shadow w-img img-fluid" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.eMZEc1Hd9mWFPvWEeV-9dwHaEI%26pid%3DApi&f=1" alt="">
-                        </div>
-                    </div>
+            <div class="d-lg-flex justify-content-between">
+                <div class="divBranch">
+                    <label for="searchBranch">Cari Film yang lagi tayang di kotamu pada minggu ini</label>
+                    <input class="form-control mr-sm-2 searchBranch" type="search" placeholder="Cari film yang ada dikotamu" aria-label="Search">
                 </div>
-                <div class="col-lg-5 mt-5">
+                <div class="mt-smm-3 divDate">
+                    <label for="searchDate">Cari Film melalui tanggal</label>
+                    <input class="form-control mr-sm-2 searchDate" type="date" >
+                </div>
+            </div>
+            <div class="d-lg-flex justify-content-between">
+                <div class="col-lg-7 main-v">
+                    @forelse($list_jadwal as $jadwal)
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h4>Tanggal penayangan : <b>{{ strftime("%A, %d %B %Y", strtotime($jadwal->start)) }} <b></h4>
+                            <p>Tersedia di bioskop : <b>{{ $jadwal->studio->name }}<b></p>
+                            <p>Kota : {{ $jadwal->studio->branch->name }}</p>
+                            <p>Judul film : <b>{{ $jadwal->movie->name }}</b></p>
+                            <p>Durasi : {{ $jadwal->movie->duration }} Menit </p>
+                            <p>Tanggal penayangan : {{ date("d-m-Y", strtotime($jadwal->start)) }}</p>
+                            <p>Jam tayang : {{ date("H:i", strtotime($jadwal->start)) }} - {{ date("H:i", strtotime($jadwal->end)) }}</p>
+                            <button type="button" class="btn btn-outline-primary d-block mb-3" data-toggle="modal" data-target="#exampleModal">
+                                Pesan Sekarang
+                            </button>
+                            <img class="rounded shadow w-img img-fluid" src="{{ asset("storage/images/{$jadwal->movie->image}") }}" alt="">
+                        </div>
+                    </div>
+                    @empty
+                    @endforelse
+                </div>
+                <div class="mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <h4>Rekomendasi Film: </h4>
+                            <h4>Segera Tayang : </h4>
 
-                            <div class="card mt-4">
-                                <div class="card-body">
-                                    <h4>Avangers</h4>
-                                    <p>Durasi : 143 Menit </p>
-                                    <p>Tersedia di Kota : -</p>
-                                    <button class="btn btn-outline-secondary d-block mb-3" type="button">Ingatkan Jika Sudah Tersedia!</button>
-                                    <img class="rounded shadow w-img img-fluid" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.eMZEc1Hd9mWFPvWEeV-9dwHaEI%26pid%3DApi&f=1" alt="">
+                            @forelse($rec_film as $film)
+                                <div class="card mt-4">
+                                    <div class="card-body">
+                                        <h4>Judul : {{ $film->movie->name }}</h4>
+                                        <p>Durasi : {{ $film->movie->duration }} Menit </p>
+                                        <p>Tayang pada :
+                                        <b>
+                                            {{ strftime("%A, %d %B %Y", strtotime($film->start)) }}
+                                        </b></p>
+                                        {{-- <button class="btn btn-outline-secondary d-block mb-3" type="button">Ingatkan Jika Sudah Tersedia!</button> --}}
+                                        <img class="rounded shadow w-img img-fluid" src="{{ asset("storage/images/{$film->movie->image}") }}" alt="banner film">
+                                    </div>
                                 </div>
-                            </div>
+                            @empty
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="text-center">Tidak ada!</h5>
+                                    </div>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>

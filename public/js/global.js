@@ -47,6 +47,53 @@ $("#start_time").on("keyup", () => {
     }
 });
 
+// ajax pencarian melalui cabang/branch
+$(".searchBranch").on("keyup", () => {
+    let query = $(".searchBranch").val();
+    if(!query.length)
+    {
+        $(".divDate").removeClass("d-none");
+    }
+    else
+    {
+        $(".divDate").addClass("d-none");
+    }
+    $.ajax({
+        "url" : "http://127.0.0.1:8000/search/branch",
+        "method" : "GET",
+        "data" : {
+            "query" : query,
+        },
+        success : data => {
+            $(".main-v").html(data);
+        }
+    });
+});
+
+// ajax pencarian melalui date/tanggal
+$(".searchDate").on("change", () => {
+    let query = $(".searchDate").val();
+    if(!query.length)
+    {
+        $(".divBranch").removeClass("d-none");
+    }
+    else
+    {
+        $(".divBranch").addClass("d-none");
+    }
+
+    $.ajax({
+        "url" : "http://127.0.0.1:8000/search/date",
+        "method" : "GET",
+        "data" : {
+            "query" : query,
+        },
+        success : data => {
+            $(".main-v").html(data);
+        }
+    });
+});
+
 
 function previewImage() {
     const inputImage = document.querySelector("#image");

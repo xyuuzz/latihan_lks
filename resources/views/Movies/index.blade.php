@@ -37,7 +37,7 @@
                     </td>
                     <td>{{ $film->duration }} Menit</td>
                     <td>
-                        <a href="{{ route("movie.show", ["movie" => $film->slug]) }}" class="btn btn-primary btn-sm">Lihat Detail</a>
+                        <a href="{{ route("movie.show", ["movie" => $film->slug]) }}" class="btn btn-outline-primary btn-sm">Lihat Detail</a>
                     </td>
                     </tr>
                     @empty

@@ -16,7 +16,7 @@ class MovieController extends Controller
     public function index()
     {
         $title = "Kelola Film";
-        $daftar_film = Movie::all();
+        $daftar_film = Movie::latest()->paginate(3);
         $index = 1;
         return view("Movies.index", compact("title", "daftar_film", "index"));
     }

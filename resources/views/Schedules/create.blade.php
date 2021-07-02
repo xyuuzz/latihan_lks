@@ -21,8 +21,8 @@
                     <label for="nama">Film</label>
                     <select class="form-control col-lg-4" name="movie" id="film">
                     @foreach($list_film as $film)
-                        @if(isset($jadwal->film->name))
-                            @if($jadwal->film->name === $film->name)
+                        @if(isset($schedule->movie->name))
+                            @if($schedule->movie->name === $film->name)
                             <option value="{{ $film->id }}" selected>{{ $film->name }}</option>
                             @else
                             <option value="{{ $film->id }}">{{ $film->name }}</option>
@@ -30,7 +30,7 @@
                         @else
                             <option value="{{ $film->id }}">{{ $film->name }}</option>
                         @endif
-                    @endforeach
+                        @endforeach
                     </select>
                     @error('film')
                         <div class="alert alert-danger mt-2" role="alert">
@@ -42,8 +42,8 @@
                     <label for="studio">Studio</label>
                     <select class="form-control col-lg-4" name="studio" id="studio">
                         @foreach($list_studio as $studio)
-                            @if(isset($jadwal->studio->name))
-                                @if($jadwal->studio->name === $studio->name)
+                            @if(isset($schedule->studio))
+                                @if($schedule->studio->name === $studio->name)
                                 <option value="{{ $studio->id }}" selected>{{ $studio->name }}</option>
                                 @else
                                 <option value="{{ $studio->id }}">{{ $studio->name }}</option>

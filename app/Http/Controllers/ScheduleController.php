@@ -111,7 +111,7 @@ class ScheduleController extends Controller
         ]);
 
         session()->flash("success", "Berhasil mensunting jadwal penanyangan film {$movie->name}");
-        return redirect()->route("schedule.index") . "?page={$page}";
+        return redirect()->route("schedule.index", ["page" => $page]);
     }
 
     /**
@@ -145,15 +145,12 @@ class ScheduleController extends Controller
         $movie = Movie::find($request->movie); # cari movie sesuai dengan yang dipilih admin
 
         // tentukan durasi per jam, jika lebih dari 60 menit, maka bagi dengan 60, jika tidak maka 0
-        $hour = $movie->duration >= 60 ?
-        ($movie->duration / 60 === 1.5 ? floor($movie->duration / 60) : round($movie->duration / 60))
-        : 0;
+        $hour = $movie->duration >= 60 ? floor($movie->duration / 60) : 0;
         // tentukan durasi per menit, yaitu durasi modulus 60;
         $minute = $movie->duration % 60 ;
         // tentukan waktu selesainya film, yaitu pecahan_time index 0 (menunjukan jam) ditambah dengan hour, dan pecahan_time index 1 ditambah dengan minute, sambungkan dengan tanda : , agar menunjukan pukul
         $ending_time = $pecahan_time[0] + $hour . ":" . $pecahan_time[1] + $minute;
 
-        // jika len dari ending time kurang dari 5 / tidak berformat : 09:00
 
         // explode ending_time yang sudah dikalkulasikan di atas, jika index 1(minute) value nya lebih dari 60
         if(explode(":", $ending_time)[1] >= 60)
@@ -162,11 +159,13 @@ class ScheduleController extends Controller
             $ending_time = ($pecahan_time[0] + $hour) + 1 . ":" . ($pecahan_time[1] + $minute) - 60;
         }
 
+        // jika len dari ending time kurang dari sama dengan 4 / tidak berformat : 09:00 dan el index ke 0 tidak bernilai 0
         if(strlen($ending_time) <= 4  && $ending_time[0] != 0)
         {
             $ending_time = "0" . $ending_time;
         }
 
+        // jika len dari ending time kurang dari 5
         if(strlen($ending_time) < 5)
         {
 

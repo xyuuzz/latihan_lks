@@ -17,15 +17,19 @@
         @endif
         <h5>Nama Studio : {{ $studio->name }}</h5>
         <p>Studio Berada di Cabang : {{ $studio->branch->name }}</p>
-        <p>Film Yang diputar di Studio <b>{{ $studio->name }}</b></p>
+        <p>Daftar Film Yang diputar di Studio <b>{{ $studio->name }}</b> pekan ini</p>
         <ul class="list-group ml-4">
-            <li class="list-item">Avangers</li>
+            @forelse($studio->schedule()->where("start", ">", date("Y-m-d"))->where("end", "<", date("Y-m-d", strtotime("next week")))->get() as $sche)
+                <li class="list-item">{{ $sche->movie->name }}</li>
+            @empty
+                <li class="list-item">Tidak ada</li>
+            @endforelse
         </ul>
             <br>
-        <p>Harga Normal (Senin-Kamis) : Rp {{ $studio->basic_price }}</p>
-        <p>Harga hari Jum'at : Rp. {{ $studio->additional_friday_price }}</p>
-        <p>Harga hari Sabtu : Rp. {{ $studio->additional_saturday_price }}</p>
-        <p>Harga hari Minggu : Rp. {{ $studio->additional_sunday_price }}</p>
+        <p>Harga Normal (Senin-Kamis) : Rp {{ number_format($studio->additional_friday_price,2,',','.') }}</p>
+        <p>Harga hari Jum'at : Rp. {{ number_format($studio->additional_friday_price,2,',','.') }}</p>
+        <p>Harga hari Sabtu : Rp. {{ number_format($studio->additional_saturday_price,2,',','.') }}</p>
+        <p>Harga hari Minggu : Rp. {{ number_format($studio->additional_sunday_price,2,',','.') }}</p>
 
 
         <a href="{{ route("studio.edit", ["studio" => $studio->slug]) }}" class="btn btn-primary btn-sm">Edit</a>

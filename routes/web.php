@@ -25,6 +25,9 @@ Route::get("/home", fn() => redirect()->route("index"));
 Route::get("login", [AuthController::class, "index"])->name("login");
 Route::post("login", [AuthController::class, "login"])->name("login_u");
 
+Route::get("search/branch", [UserController::class, "search_branch"])->name("search_branch");
+Route::get("search/date", [UserController::class, "search_date"])->name("search_date");
+
 Route::middleware("auth")->group(function() {
 
     Route::delete("schedule/{schedule:slug}/{page}", [ScheduleController::class, "destroy"])->name("schedule.destroy");

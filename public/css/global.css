@@ -15,6 +15,10 @@
         background-size: 300%;
     }
 
+    .mt-smm-3 {
+        margin-top: 20px;
+    }
+
 }
 
 @media only screen and (max-width: 1018px)
