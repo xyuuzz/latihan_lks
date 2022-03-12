@@ -23,9 +23,11 @@ class BlogRequest extends FormRequest
      */
     public function rules()
     {
+        $isThumbnailRequired = request()->method === "POST" ? "required" : "";
         return [
             "title" => "required|string|min:5|max:150",
-            "body" => "required|string|min:20"
+            "body" => "required|string|min:20",
+            "thumbnail" => "$isThumbnailRequired|max:1024|image"
         ];
     }
 
@@ -44,6 +46,9 @@ class BlogRequest extends FormRequest
             "body.required" => "Field ini wajib diisi!",
             "body.string" => "Field ini wajib berbentuk string",
             "body.min" => "Minimal ada 20 huruf dalam field ini",
+            "thumbnail.required" => "Field ini wajib diisi!",
+            "thumbnail.max" => "Max Besar file ada 1MB",
+            "thumbnail.image" => "File harus berupa gambar"
         ];
     }
 }

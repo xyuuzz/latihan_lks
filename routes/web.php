@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Middleware\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
+Route::get("landing-page", "HomeController@landingPage");
 
-Route::middleware(["auth", "admin"])->group(function() {
-    Route::resource("blog", "BlogController")->except("index", "edit", "create");
+Route::middleware(["auth", Admin::class])->group(function() {
+    Route::resource("blog", "BlogController")
+        ->scoped(["blog" => "slug"]);
     Route::get("search", "BlogController@search");
 });

@@ -18,9 +18,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+{{--    My Style--}}
+    <link rel="stylesheet" href="{{asset("css/global.css")}}">
+
 </head>
 <body>
     <div id="app">
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -72,12 +77,19 @@
             </div>
         </nav>
 
-        <main class="py-4">
+{{--        @if(!route("login"))--}}
+{{--            <x-landing-page.navbar />--}}
+{{--        @endif--}}
+
+        <main>
             @yield('content')
         </main>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{{asset("js/global.js")}}"></script>
+
+    {{--    Font Awesome--}}
+    <script src="https://kit.fontawesome.com/1bfd9a5048.js" crossorigin="anonymous"></script>
 </body>
 </html>

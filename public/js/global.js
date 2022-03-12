@@ -80,18 +80,9 @@ const errorMessage = types => {
     })
 }
 
-const editForm = (title, body) => {
-    $("input[name='title']").val(title)
-    $("textarea[name='body']").val(body)
-}
-
 const toHome = () => {
-    $("body").load(url);
-
     let stateObj = { id: "100" };
-    window.history.replaceState(stateObj, "Home", url);
-}
+    window.history.replaceState(stateObj, "Home", `${url}/blog`);
 
-/*$("form").submit(e => {
-    e.preventDefault()
-})*/
+    $("body").load(`${url}/blog`);
+}

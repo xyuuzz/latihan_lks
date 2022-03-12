@@ -9,12 +9,18 @@ class Blog extends Model
     protected $fillable = [
         "title",
         "slug",
-        "body"
+        "body",
+        "thumbnail"
     ];
 
 //    dapatkan data dari table blog dari yang terbaru dan paginate dengan masing masing page adalah 4 data
     public static function getBlog()
     {
         return self::latest()->paginate(4);
+    }
+
+    public function getThumbnail()
+    {
+        return asset("storage/thumbnail_blog/{$this->thumbnail}");
     }
 }

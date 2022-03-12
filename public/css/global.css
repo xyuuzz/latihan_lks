@@ -1,0 +1,54 @@
+.navbar {
+    box-shadow: 0px 1px 5px;
+}
+
+.bg-banner {
+    background-image: url("http://127.0.0.1:8000/images/banner.jpg");
+    background-size: cover;
+    background-blend-mode: luminosity;
+    height: 500px;
+}
+
+.hero-content {
+    margin-top: 160px;
+}
+
+.hero-content .title {
+    font-size: 50px;
+}
+
+.hero-content .description {
+    font-size: 20px;
+}
+
+.line-separator {
+    border-bottom: black solid 3px;
+    width: 40px;
+}
+
+.article-wrap {
+    line-height: 50%;
+}
+
+.contact-card {
+    width: 100px;
+}
+
+
+@media (min-width: 0px) and (max-width: 768px) {
+    .article-description {
+        font-size: 12px;
+    }
+
+    .thumbnail-article {
+        width: 130px;
+    }
+
+    .hero-content .title {
+        font-size: 36px;
+    }
+
+    .hero-content .description {
+        font-size: 16px;
+    }
+}
