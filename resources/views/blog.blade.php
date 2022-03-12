@@ -15,11 +15,11 @@
             <button onClick="toHome()" class="btn btn-primary">Kembali Ke Home</button>
             <div class="d-flex justify-content-between">
                 <button onClick="editForm(`{{$blog->title}}`, `{{ $blog->body }}`)" class="btn-edit btn btn-outline-info mr-3" data-toggle="modal" data-target="#fromModal">Edit</button>
-                <x-delete-blog :blog=$blog />
+                <x-blog.delete-blog :blog=$blog />
             </div>
         </div>
 
-        <x-form-blog :blog=$blog :type="$type"/>
+        <x-blog.form-blog :blog=$blog :type="$type"/>
     </div>
 @stop
 
